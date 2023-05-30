@@ -1,7 +1,7 @@
 #hangman and the words are from another file
 
 import random
-
+import os as o
 def the_person(counter):
     if counter == 1:
         print(" |")
@@ -35,23 +35,31 @@ def getting_words_from_file():
 
     global guess_counter
     guess_counter = 0
+
     #make empty list
     list = []
+
+    #create absolute path since it is unknown where the user will ope the script and need to find "hangman_words.txt"
+    path = o.path.abspath(o.path.dirname(__file__))
+    filename = o.path.join(path, "hangman_words.txt")
+
     #opening file and reading each line
-    file1 = open("hangman_words.txt", 'r')
+    file1 = open(filename, 'r')
     lines = file1.readlines()
 
     #break up each line to each word then put them in a list
     for line in lines:
         for word in line.split():
             list.append(word)
+
     #return list with words
     return list
+
        
 def hangman(list_of_words):
+
     #get the list and pick a random word from it
     hangman_word = random.choice(list_of_words)
-
     empty_word = []
     previous_guesses = []
     global guess_counter
@@ -60,8 +68,7 @@ def hangman(list_of_words):
         empty_word.append("_")
 
     
-    while(True):
-        
+    while(True):   
         #print the hangman
         the_person(guess_counter)
         #if used up 7 try then you fail
@@ -85,9 +92,11 @@ def hangman(list_of_words):
         #asking for guess
         letter_guess = input("\nwhat is your guess: ")
 
+        #if guess is already guessed and is correct then will ask again for a new guess
         if letter_guess in empty_word:
             print("you have already guessed that correct letter, try a different one")
             continue
+        #add guess to list of previous guessses
         previous_guesses.append(letter_guess)
 
 
@@ -108,6 +117,11 @@ def hangman(list_of_words):
             print("congratulations, you win")
             break
 
+    ending()
+
+
+#will ask the user if they want to play again   
+def ending():
     while(True):
         answer = input("Do you want to play again(enter yes or no): ")
         if answer == "yes":
@@ -115,7 +129,6 @@ def hangman(list_of_words):
         if answer == "no":
             print("thank you for playing")
             exit()
-   
 
 
 hangman(getting_words_from_file())
