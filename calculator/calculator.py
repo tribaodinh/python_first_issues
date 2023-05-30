@@ -5,7 +5,7 @@ class calculator:
         self.first_number = first_number
         self.second_number = second_number
 
-    #allow to preplace first input with old value from previous calulations 
+    #allow to preplace first input with old value from previous calculations  
     old_value_have = False
     #value from previous calulation
     old_value = 0
