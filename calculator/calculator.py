@@ -1,4 +1,3 @@
-import math
 
 class calculator:
     def __init__(self, first_number, second_number):
@@ -11,88 +10,84 @@ class calculator:
     old_value = 0
     
     #starting function
-    @staticmethod
+    
     def starting():
-        #while to repeat until user give valid numbers
+        #while loop to repeat until user give valid numbers
         while(True):
-
             try:
+                #ask for first input but if old_value_have is true then first input is equal to old_value
                 if calculator.old_value_have == False:
                     first = int(input("what is the first number: "))
                 else:
                     first = calculator.old_value
                 second = int(input("what is the second number: "))
-                #way to break from loop
                 break
             #catch value errors and not break program
             except ValueError:
                 print("please enter valid input")
 
         #create constuctor
-        T = calculator(first, second)   
-        #start operation function
+        T = calculator(first, second)      
         T.operations() 
 
-
-    #add the 2 numbers
+ 
     #must use calculator.addition(number1, number2) to use function in function in class
     #or put @staticmethod above function to use self
     def addition(number1, number2):
         return number1 + number2
-
-    #subtract the 2 numbers
+ 
     def subtraction(number1, number2):
         return number1 - number2
-
-    #multiplication the 2 numbers
+  
     def multiplication(number1, number2):
-        return number1 * number2
-
-    #divide the 2 numbers
+        return number1 * number2 
+    
     def divide(number1, number2):
         return number1 / number2
     
-    #CREATE FUNCTION TO END operations()
-    def ending(self, result):
-        #print result
+    def exponent(number1, number2):
+        return number1 ** number2
+    
+    def nth_root(number1, number2):
+        return number1 ** (1/number2)
+    
+  
+    def ending(result):  
         print(f"this is the result: {result}") 
 
         #while loop to ask if they want keep value or start anew or end it
         while (True):
             asking = input("Do want to keep the result and continue(type \"continue\") or state anew (type \"new\") or end it (type \"end\"): ")
             
-            #check if the input is "continue"
             if asking == "continue":
                 calculator.old_value = result
                 calculator.old_value_have = True
-                calculator.starting()   
-            #check if the input is "new"
+                calculator.starting() 
             if asking == "new":
                 calculator.old_value_have = False
                 calculator.starting()   
-            #check if the input is "end"
             if asking == "end":
+                #exit program
                 exit()
 
-            print("Please enter valid symbol")
+            print("Please enter valid input")
 
 
     def operations(self):
-        #while loop for when the user pick somethung that is not a valid operation
+        #while loop for when the user pick something that is not a valid operation
         while(True):
-            symbol = input("which operation do you want(+, -, /, or *): ")
-            #entering "+" will start addition function 
+            symbol = input("which operation do you want(+, -, /, *, ^ (the second number will be the exopent) or r (nth root, the second number will be the root)): ")
+
             if symbol == "+":
-                self.ending(calculator.addition(self.first_number, self.second_number))
-            #entering "-" will start subtraction function 
+                calculator.ending(calculator.addition(self.first_number, self.second_number))
             if symbol == "-":
-                self.ending(calculator.subtraction(self.first_number, self.second_number))
-            #entering "/" will start divide function 
+                calculator.ending(calculator.subtraction(self.first_number, self.second_number))
             if symbol == "/":
-                self.ending(calculator.divide(self.first_number, self.second_number))
-            #entering "*" will start mutiplication function 
+                calculator.ending(calculator.divide(self.first_number, self.second_number))
             if symbol == "*":
-                self.ending(calculator.multiplication(self.first_number, self.second_number))
+                calculator.ending(calculator.multiplication(self.first_number, self.second_number))
+            if symbol == "^":
+                calculator.ending(calculator.exponent(self.first_number, self.second_number))
 
 
 calculator.starting()

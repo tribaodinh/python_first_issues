@@ -31,6 +31,9 @@ def the_person(counter):
         print("/|\\")
         print("/ \\")
 
+
+#NEW WAY TO GET WORD FROM WEBSITE WITH URL(https://randomword.com/words/o(this spot can change letters).html) AND XPATH, FIGURE OUT
+
 def getting_words_from_file():
 
     global guess_counter
